@@ -6,3 +6,10 @@
   .animate-marquee {
     animation: marquee 30s linear infinite;
   }
+
+  .word-break {
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  
