@@ -30,7 +30,7 @@ function Desfile({ compromisos }) {
   <div className="absolute inset-0 flex items-center justify-center text-center px-4">
   <div className="w-[180px] h-[180px] flex flex-col justify-center items-center text-black text-center break-words px-2">
   <p className="text-[14px] font-bold leading-tight break-words word-break w-full">
-    {c.nombre_completo || "Anónimo"}
+    {c.familia || "Anónimo"}
   </p>
   <p className="text-[12px] leading-tight break-words word-break w-full mt-">
     {c.nombre_practica}

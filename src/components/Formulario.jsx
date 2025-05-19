@@ -3,7 +3,9 @@ import { useState } from "react";
 export default function Formulario({ onSubmitCompromiso }) {
   const [form, setForm] = useState({
     nombre_completo: "",
+    familia: "",
     vereda: "",
+    otra_vereda: "",
     organizaciones: "",
     otra_organizacion: "",
     correo_electronico: "",
@@ -23,6 +25,7 @@ export default function Formulario({ onSubmitCompromiso }) {
     // Validar campos obligatorios
     if (
       !form.nombre_completo ||
+      !form.familia ||
       !form.correo_electronico ||
       !form.nombre_practica
     ) {
@@ -56,9 +59,21 @@ export default function Formulario({ onSubmitCompromiso }) {
         required
       />
       <input
+        name="familia"
+        placeholder="Nombre de la familia"
+        value={form.familia}
+        onChange={handleChange}
+      />
+      <input
         name="vereda"
         placeholder="Vereda"
         value={form.vereda}
+        onChange={handleChange}
+      />
+      <input
+        name="otra_vereda"
+        placeholder="Otra vereda (si no está en la lista)"
+        value={form.otra_vereda}
         onChange={handleChange}
       />
       <input
