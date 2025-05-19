@@ -2,11 +2,6 @@ import React from "react";
 import "./Desfile.css";
 import { db, collection, onSnapshot, query } from "../firebase";
 
-const perfiles = [
-  "/niña.png",
-  "/joven.png",
-  "/adulto.png",
-];
 
 function Desfile({ compromisos }) {
   if (compromisos.length === 0) {
@@ -35,10 +30,10 @@ function Desfile({ compromisos }) {
   <div className="absolute inset-0 flex items-center justify-center text-center px-4">
   <div className="w-[180px] h-[180px] flex flex-col justify-center items-center text-black text-center break-words px-2">
   <p className="text-[14px] font-bold leading-tight break-words word-break w-full">
-    {c.nombre || "Anónimo"}
+    {c.nombre_completo || "Anónimo"}
   </p>
-  <p className="text-[12px] leading-tight break-words word-break w-full mt-1">
-    {c.medida}
+  <p className="text-[12px] leading-tight break-words word-break w-full mt-">
+    {c.nombre_practica}
   </p>
 </div>
   </div>
