@@ -43,7 +43,7 @@ export default function App() {
   return (
     <div>
       <h1 className="text-4xl font-bold text-black text-center my-5">
-      Buenas pácticas de salvaguardia 
+      Buenas prácticas de salvaguardia de la cultura silletera
         </h1>
       {!enviado ? (
         <Formulario

@@ -84,11 +84,11 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
     <div className="flex justify-center px-4 py-8 bg-gray-10 min-h-screen">
 
       <form onSubmit={handleSubmit} className="w-full max-w-xl p-6 rounded-2xl shadow-lg space-y-4"
-   style={{ backgroundColor: 'rgba(223, 130, 38, 0.70)' }}noValidate>
+        style={{ backgroundColor: 'rgba(223, 130, 38, 0.70)' }} noValidate>
 
         {/* Nombre completo */}
         <div>
-          <label htmlFor="nombre_completo" className="block text-sm font-medium text-gray-700">Nombre completo *</label>
+          <label htmlFor="nombre_completo" className="block text-sm font-medium text-gray-700">Nombre completo</label>
           <input
             id="nombre_completo"
             name="nombre_completo"
@@ -101,7 +101,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Familia */}
         <div>
-          <label htmlFor="familia" className="block text-sm font-medium text-gray-700">Nombre de la familia *</label>
+          <label htmlFor="familia" className="block text-sm font-medium text-gray-700">Grupo familiar proponente</label>
           <input
             id="familia"
             name="familia"
@@ -114,7 +114,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Vereda */}
         <div>
-          <label htmlFor="vereda" className="block text-sm font-medium text-gray-700">Vereda *</label>
+          <label htmlFor="vereda" className="block text-sm font-medium text-gray-700">Vereda o sector de Santa Elena</label>
           <select
             id="vereda"
             name="vereda"
@@ -131,7 +131,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
         {/* Otra vereda */}
         {form.vereda === "Otra" && (
           <div>
-            <label htmlFor="otra_vereda" className="block text-sm font-medium text-gray-700">Otra vereda</label>
+            <label htmlFor="otra_vereda" className="block text-sm font-medium text-gray-700">Otra sector</label>
             <input
               id="otra_vereda"
               name="otra_vereda"
@@ -145,7 +145,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Organizaciones */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Organizaciones a las que pertenece</label>
+          <label className="block text-sm font-medium text-gray-700">Organización a la que pertenece</label>
           <div className="space-y-2 mt-2">
             {ORGANIZACIONES.map((org) => (
               <label key={org} className="flex items-center gap-2 text-sm text-gray-700">
@@ -179,7 +179,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Correo */}
         <div>
-          <label htmlFor="correo_electronico" className="block text-sm font-medium text-gray-700">Correo electrónico *</label>
+          <label htmlFor="correo_electronico" className="block text-sm font-medium text-gray-700">Correo electrónico</label>
           <input
             id="correo_electronico"
             type="email"
@@ -193,7 +193,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Celular */}
         <div>
-          <label htmlFor="numero_celular" className="block text-sm font-medium text-gray-700">Número celular *</label>
+          <label htmlFor="numero_celular" className="block text-sm font-medium text-gray-700">Número celular</label>
           <input
             id="numero_celular"
             name="numero_celular"
@@ -204,22 +204,9 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
           {errores.numero_celular && <p className="text-red-600 text-sm mt-1">{errores.numero_celular}</p>}
         </div>
 
-        {/* Nombre práctica */}
-        <div>
-          <label htmlFor="nombre_practica" className="block text-sm font-medium text-gray-700">Nombre de la buena práctica *</label>
-          <input
-            id="nombre_practica"
-            name="nombre_practica"
-            value={form.nombre_practica}
-            onChange={handleChange}
-            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errores.nombre_practica && <p className="text-red-600 text-sm mt-1">{errores.nombre_practica}</p>}
-        </div>
-
         {/* Problema */}
         <div>
-          <label htmlFor="problema" className="block text-sm font-medium text-gray-700">¿Qué problema ayuda a resolver?</label>
+          <label htmlFor="problema" className="block text-sm font-medium text-gray-700">¿Qué problema quieres ayudar a resolver?</label>
           <select
             id="problema"
             name="problema"
@@ -233,9 +220,22 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
           {errores.problema && <p className="text-red-600 text-sm mt-1">{errores.problema}</p>}
         </div>
 
+        {/* Nombre práctica */}
+        <div>
+          <label htmlFor="nombre_practica" className="block text-sm font-medium text-gray-700">Nombre de la buena práctica</label>
+          <input
+            id="nombre_practica"
+            name="nombre_practica"
+            value={form.nombre_practica}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {errores.nombre_practica && <p className="text-red-600 text-sm mt-1">{errores.nombre_practica}</p>}
+        </div>
+
         {/* Descripción */}
         <div>
-          <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700">Explique la buena práctica *</label>
+          <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700">Explique la buena práctica</label>
           <textarea
             id="descripcion"
             name="descripcion"
@@ -260,18 +260,18 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
 
       <Modal visible={showModal} onClose={() => { setShowModal(false); onConfirm(); }}>
-  <h2 className="text-xl font-semibold mb-4">¡Formulario enviado con éxito!</h2>
-  <p className="mb-6">Gracias por tu compromiso. Ahora puedes continuar viendo el desfile.</p>
-  <button
-    onClick={() => {
-      setShowModal(false);
-      onConfirm();
-    }}
-    className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
-  >
-    Aceptar
-  </button>
-</Modal>
+        <h2 className="text-xl font-semibold mb-4">¡Formulario enviado con éxito!</h2>
+        <p className="mb-6">Gracias por tu compromiso. Ahora puedes continuar viendo el desfile.</p>
+        <button
+          onClick={() => {
+            setShowModal(false);
+            onConfirm();
+          }}
+          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+        >
+          Aceptar
+        </button>
+      </Modal>
 
     </div>
 
