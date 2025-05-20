@@ -9,21 +9,20 @@ function Desfile({ compromisos }) {
   }
 
   return (
-    <div className="relative overflow-hidden border rounded-l bg-green-100 p-5 h-[320px] font-['font-quicksand']">
-      <h2 className="text-lg font-bold text-green-800 mb-4 text-center">Desfile de compromisos</h2>
+    <div className="relative overflow-hidden rounded-l bg-yellow-0 p-20 h-[450px] font-['font-quicksand']">
       <div className="whitespace-nowrap animate-marquee flex gap-8">
       {compromisos.map((c, i) => (
   <div
     key={i}
-    className="inline-block w-[220px] p-2 animate-fade-in"
+    className="inline-block w-[300px] p-10 animate-fade-in"
     style={{ animationDelay: `${i * 0.2}s` }}
   >
-    <div className="relative w-[200px] h-[200px] mx-auto">
+    <div className="relative w-[320px] h-[320px] mx-auto">
       {/* Imagen floral */}
       <img
-        src="/corona.jpg"
-        alt="corona floral"
-        className="absolute inset-0 w-full h-full object-contain border-2 border-gray-300 rounded-full"
+        src="/silla.png"
+        alt="silleta"
+        className="absolute inset-0 w-full h-full object-contain  rounded-full"
       />
       
       {/* Contenido dentro de la corona */}

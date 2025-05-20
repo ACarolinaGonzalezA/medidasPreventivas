@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { validarFormulario } from "../utils/validarFormulario";
+import Modal from "./Modal";
 
 const VEREDAS = [
   "Barro Blanco", "El Cerro", "El Llano", "El Plan", "El Placer",
@@ -23,7 +24,7 @@ const PROBLEMAS = [
   "Exceso de visitantes o turistas al predio familiar"
 ];
 
-export default function Formulario({ onSubmitCompromiso }) {
+export default function Formulario({ onSubmitCompromiso, onConfirm }) {
   const [form, setForm] = useState({
     nombre_completo: "",
     familia: "",
@@ -45,7 +46,7 @@ export default function Formulario({ onSubmitCompromiso }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  
+
   function handleCheckboxChange(e) {
     const value = e.target.value;
     let seleccionadas = form.organizaciones ? form.organizaciones.split(", ") : [];
@@ -60,141 +61,220 @@ export default function Formulario({ onSubmitCompromiso }) {
 
     setForm({ ...form, organizaciones: seleccionadas.join(", ") });
   }
-  
-  function handleSubmit(e) {
+
+
+  async function handleSubmit(e) {
     e.preventDefault();
     const nuevosErrores = validarFormulario(form);
     setErrores(nuevosErrores);
+
     if (Object.keys(nuevosErrores).length > 0) return;
 
-    onSubmitCompromiso(form);
-    setShowModal(true);
+    try {
+      const exito = await onSubmitCompromiso(form);
+      if (exito) {
+        setShowModal(true);
+      }
+    } catch (error) {
+      console.error("Error al enviar:", error);
+    }
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 max-w-xl mx-auto" noValidate>
-        <input
-          name="nombre_completo"
-          placeholder="Nombre completo *"
-          value={form.nombre_completo}
-          onChange={handleChange}
-        />
-        {errores.nombre_completo && <p className="text-red-600 text-sm">{errores.nombre_completo}</p>}
+    <div className="flex justify-center px-4 py-8 bg-gray-10 min-h-screen">
 
-        <input
-          name="familia"
-          placeholder="Nombre de la familia *"
-          value={form.familia}
-          onChange={handleChange}
-        />
-        {errores.familia && <p className="text-red-600 text-sm">{errores.familia}</p>}
+      <form onSubmit={handleSubmit} className="w-full max-w-xl p-6 rounded-2xl shadow-lg space-y-4"
+   style={{ backgroundColor: 'rgba(223, 130, 38, 0.70)' }}noValidate>
 
-        <select name="vereda" value={form.vereda} onChange={handleChange}>
-          <option value="">Seleccione una vereda *</option>
-          {VEREDAS.map((v, i) => <option key={i} value={v}>{v}</option>)}
-        </select>
-        {errores.vereda && <p className="text-red-600 text-sm">{errores.vereda}</p>}
+        {/* Nombre completo */}
+        <div>
+          <label htmlFor="nombre_completo" className="block text-sm font-medium text-gray-700">Nombre completo *</label>
+          <input
+            id="nombre_completo"
+            name="nombre_completo"
+            value={form.nombre_completo}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {errores.nombre_completo && <p className="text-red-600 text-sm mt-1">{errores.nombre_completo}</p>}
+        </div>
 
+        {/* Familia */}
+        <div>
+          <label htmlFor="familia" className="block text-sm font-medium text-gray-700">Nombre de la familia *</label>
+          <input
+            id="familia"
+            name="familia"
+            value={form.familia}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {errores.familia && <p className="text-red-600 text-sm mt-1">{errores.familia}</p>}
+        </div>
+
+        {/* Vereda */}
+        <div>
+          <label htmlFor="vereda" className="block text-sm font-medium text-gray-700">Vereda *</label>
+          <select
+            id="vereda"
+            name="vereda"
+            value={form.vereda}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            <option value="">Seleccione una vereda</option>
+            {VEREDAS.map((v, i) => <option key={i} value={v}>{v}</option>)}
+          </select>
+          {errores.vereda && <p className="text-red-600 text-sm mt-1">{errores.vereda}</p>}
+        </div>
+
+        {/* Otra vereda */}
         {form.vereda === "Otra" && (
-          <>
+          <div>
+            <label htmlFor="otra_vereda" className="block text-sm font-medium text-gray-700">Otra vereda</label>
             <input
+              id="otra_vereda"
               name="otra_vereda"
-              placeholder="Otra vereda"
               value={form.otra_vereda}
               onChange={handleChange}
+              className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
-            {errores.otra_vereda && <p className="text-red-600 text-sm">{errores.otra_vereda}</p>}
-          </>
+            {errores.otra_vereda && <p className="text-red-600 text-sm mt-1">{errores.otra_vereda}</p>}
+          </div>
         )}
 
-        <label><strong>Organizaciones a las que pertenece:</strong></label>
-        {ORGANIZACIONES.map((org) => (
-          <label key={org} className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              value={org}
-              checked={form.organizaciones.includes(org)}
-              onChange={handleCheckboxChange}
-            />
-            {org}
-          </label>
-        ))}
-        {errores.organizaciones && <p className="text-red-600 text-sm">{errores.organizaciones}</p>}
+        {/* Organizaciones */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Organizaciones a las que pertenece</label>
+          <div className="space-y-2 mt-2">
+            {ORGANIZACIONES.map((org) => (
+              <label key={org} className="flex items-center gap-2 text-sm text-gray-700">
+                <input
+                  type="checkbox"
+                  value={org}
+                  checked={form.organizaciones.includes(org)}
+                  onChange={handleCheckboxChange}
+                />
+                {org}
+              </label>
+            ))}
+          </div>
+          {errores.organizaciones && <p className="text-red-600 text-sm mt-1">{errores.organizaciones}</p>}
+        </div>
 
+        {/* Otra organización */}
         {form.organizaciones.includes("Otra") && (
-          <>
+          <div>
+            <label htmlFor="otra_organizacion" className="block text-sm font-medium text-gray-700">Otra organización</label>
             <input
+              id="otra_organizacion"
               name="otra_organizacion"
-              placeholder="Escribe el nombre de la otra organización"
               value={form.otra_organizacion}
               onChange={handleChange}
+              className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
-            {errores.otra_organizacion && <p className="text-red-600 text-sm">{errores.otra_organizacion}</p>}
-          </>
+            {errores.otra_organizacion && <p className="text-red-600 text-sm mt-1">{errores.otra_organizacion}</p>}
+          </div>
         )}
 
-        <input
-          type="email"
-          name="correo_electronico"
-          placeholder="Correo electrónico *"
-          value={form.correo_electronico}
-          onChange={handleChange}
-        />
-        {errores.correo_electronico && <p className="text-red-600 text-sm">{errores.correo_electronico}</p>}
+        {/* Correo */}
+        <div>
+          <label htmlFor="correo_electronico" className="block text-sm font-medium text-gray-700">Correo electrónico *</label>
+          <input
+            id="correo_electronico"
+            type="email"
+            name="correo_electronico"
+            value={form.correo_electronico}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {errores.correo_electronico && <p className="text-red-600 text-sm mt-1">{errores.correo_electronico}</p>}
+        </div>
 
-        <input
-          name="numero_celular"
-          placeholder="Número celular (10 dígitos)"
-          value={form.numero_celular}
-          onChange={handleChange}
-        />
-        {errores.numero_celular && <p className="text-red-600 text-sm">{errores.numero_celular}</p>}
+        {/* Celular */}
+        <div>
+          <label htmlFor="numero_celular" className="block text-sm font-medium text-gray-700">Número celular *</label>
+          <input
+            id="numero_celular"
+            name="numero_celular"
+            value={form.numero_celular}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {errores.numero_celular && <p className="text-red-600 text-sm mt-1">{errores.numero_celular}</p>}
+        </div>
 
-        <input
-          name="nombre_practica"
-          placeholder="Nombre de la buena práctica *"
-          value={form.nombre_practica}
-          onChange={handleChange}
-        />
-        {errores.nombre_practica && <p className="text-red-600 text-sm">{errores.nombre_practica}</p>}
+        {/* Nombre práctica */}
+        <div>
+          <label htmlFor="nombre_practica" className="block text-sm font-medium text-gray-700">Nombre de la buena práctica *</label>
+          <input
+            id="nombre_practica"
+            name="nombre_practica"
+            value={form.nombre_practica}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {errores.nombre_practica && <p className="text-red-600 text-sm mt-1">{errores.nombre_practica}</p>}
+        </div>
 
-        <select name="problema" value={form.problema} onChange={handleChange}>
-          <option value="">¿Qué problema ayuda a resolver?</option>
-          {PROBLEMAS.map((p, i) => <option key={i} value={p}>{p}</option>)}
-        </select>
+        {/* Problema */}
+        <div>
+          <label htmlFor="problema" className="block text-sm font-medium text-gray-700">¿Qué problema ayuda a resolver?</label>
+          <select
+            id="problema"
+            name="problema"
+            value={form.problema}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            <option value="">Seleccione una opción</option>
+            {PROBLEMAS.map((p, i) => <option key={i} value={p}>{p}</option>)}
+          </select>
+          {errores.problema && <p className="text-red-600 text-sm mt-1">{errores.problema}</p>}
+        </div>
 
-        <textarea
-          name="descripcion"
-          placeholder="Explique la buena práctica"
-          value={form.descripcion}
-          onChange={handleChange}
-        />
-        {errores.descripcion && <p className="text-red-600 text-sm">{errores.descripcion}</p>}
+        {/* Descripción */}
+        <div>
+          <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700">Explique la buena práctica *</label>
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            rows="4"
+            value={form.descripcion}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          {errores.descripcion && <p className="text-red-600 text-sm mt-1">{errores.descripcion}</p>}
+        </div>
 
-        <button
-          type="submit"
-          className="bg-green-600 text-white rounded px-4 py-2"
-        >
-          Enviar
-        </button>
+        {/* Botón */}
+        <div className="text-center">
+          <button
+            type="submit"
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition"
+          >
+            Enviar compromiso
+          </button>
+        </div>
       </form>
 
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-md shadow-lg">
-            <h2 className="text-xl font-bold mb-2">¡Haz parte del compromiso con la cultura silletera!</h2>
-            <p className="mb-4">
-              Registra tus buenas prácticas o medidas preventivas para la salvaguardia de la pintura silletera a través de fotos o videos (con la fecha visible) y envíalas al correo <b>evaluacionpesmcsilletera@gmail.com</b>.
-              <br /><br />
-              Tu dedicación será valorada: quienes participen podrán recibir un reconocimiento especial por su compromiso con esta tradición viva.
-              <br /><br />
-              ¡Sé ejemplo y deja huella!
-            </p>
-            <button onClick={() => setShowModal(false)} className="bg-green-600 text-white px-4 py-2 rounded">Cerrar</button>
-          </div>
-        </div>
-      )}
-    </>
+
+      <Modal visible={showModal} onClose={() => { setShowModal(false); onConfirm(); }}>
+  <h2 className="text-xl font-semibold mb-4">¡Formulario enviado con éxito!</h2>
+  <p className="mb-6">Gracias por tu compromiso. Ahora puedes continuar viendo el desfile.</p>
+  <button
+    onClick={() => {
+      setShowModal(false);
+      onConfirm();
+    }}
+    className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+  >
+    Aceptar
+  </button>
+</Modal>
+
+    </div>
+
+
   );
 }

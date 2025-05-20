@@ -33,6 +33,9 @@ export function validarFormulario(form) {
     if (!form.nombre_practica) {
       errores.nombre_practica = "Campo obligatorio.";
     }
+    if (!form.problema) {
+        errores.problema = "Debe seleccionar un problema.";
+      }
   
     if (!form.descripcion) {
       errores.descripcion = "Por favor explica la buena práctica.";

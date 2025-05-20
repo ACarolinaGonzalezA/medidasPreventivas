@@ -23,26 +23,40 @@ export default function App() {
         body: JSON.stringify(form),
       });
       if (res.ok) {
-        setEnviado(true);
         // Recargar compromisos para que aparezca el nuevo
         const res2 = await fetch("http://localhost:4000/api/buenas_practicas");
         const data = await res2.json();
         setCompromisos(data);
+
+        return true;
+
       } else {
         alert("Error al enviar el formulario");
+        return false;
       }
     } catch (error) {
       console.error("Error enviando formulario:", error);
+      return false;
     }
   }
 
   return (
-    <div style={{ maxWidth: 600, margin: "auto" }}>
+    <div>
+      <h1 className="text-4xl font-bold text-black text-center my-5">
+      Buenas pácticas de salvaguardia 
+        </h1>
       {!enviado ? (
-        <Formulario onSubmitCompromiso={agregarCompromiso} />
+        <Formulario
+        onSubmitCompromiso={agregarCompromiso}
+        onConfirm={() => {
+          console.log("App recibió confirmación del modal");
+          setEnviado(true);
+        }}
+      />
       ) : (
         <Desfile compromisos={compromisos} />
       )}
     </div>
+    
   );
 }
