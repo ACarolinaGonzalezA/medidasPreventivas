@@ -5,10 +5,11 @@ import Desfile from "./components/Desfile";
 export default function App() {
   const [compromisos, setCompromisos] = useState([]);
   const [enviado, setEnviado] = useState(false);
+  const API_URL = import.meta.env.BACKEND;
 
   // Cargar las buenas prácticas desde backend
   useEffect(() => {
-    fetch(`${import.meta.env.BACKEND}/api/buenas_practicas`)
+    fetch(`${API_URL}/api/buenas_practicas`)
       .then(res => res.json())
       .then(data => setCompromisos(data))
       .catch(err => console.error("Error cargando buenas prácticas:", err));
@@ -17,14 +18,14 @@ export default function App() {
   // Función para enviar formulario al backend
   async function agregarCompromiso(form) {
     try {
-      const res = await fetch(`${import.meta.env.BACKEND}/api/buenas_practicas`, {
+      const res = await fetch(`${API_URL}/api/buenas_practicas`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (res.ok) {
         // Recargar compromisos para que aparezca el nuevo
-        const res2 = await fetch(`${import.meta.env.BACKEND}/api/buenas_practicas`);
+        const res2 = await fetch(`${API_URL}/api/buenas_practicas`);
         const data = await res2.json();
         setCompromisos(data);
 
