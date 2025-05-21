@@ -1,6 +1,6 @@
 import React from "react";
 import "./Desfile.css";
-import { db, collection, onSnapshot, query } from "../firebase";
+
 
 
 function Desfile({ compromisos }) {
