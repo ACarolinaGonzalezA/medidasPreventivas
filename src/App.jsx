@@ -5,7 +5,7 @@ import Desfile from "./components/Desfile";
 export default function App() {
   const [compromisos, setCompromisos] = useState([]);
   const [enviado, setEnviado] = useState(false);
-  const API_URL = import.meta.env.BACKEND;
+  const API_URL = import.meta.env.VITE_BACKEND;
 
   // Cargar las buenas prácticas desde backend
   useEffect(() => {
