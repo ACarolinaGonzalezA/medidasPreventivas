@@ -19,9 +19,9 @@ const PROBLEMAS = [
   "Deterioro de jardines y zonas verdes en los predios silleteros",
   "Mal manejo de residuos sólidos o basura",
   "Desaprovechamiento y mal manejo de residuos orgánicos",
-  "Utilización de material plástico de un solo uso",
+  "Utilización de material plástico de un solo uso (bolsas, empaques, envases, cubiertos, etc.)",
   "Afectación a la fauna (animales) por emisión de ruido",
-  "Exceso de visitantes o turistas al predio familiar"
+  "Exceso de visitantes o de turistas al predio familiar"
 ];
 
 export default function Formulario({ onSubmitCompromiso, onConfirm }) {
@@ -37,7 +37,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
     nombre_practica: "",
     problema: "",
     descripcion: "",
-    redes:""
+    redes: ""
   });
 
   const [errores, setErrores] = useState({});
@@ -85,11 +85,11 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
     <div className="flex justify-center px-4 py-8 bg-gray-10 min-h-screen">
 
       <form onSubmit={handleSubmit} className="w-full max-w-xl p-6 rounded-2xl shadow-lg space-y-4"
-        style={{ backgroundColor: 'rgba(223, 130, 38, 0.70)' }} noValidate>
+        style={{ backgroundColor: 'rgba(223, 130, 38, 0.80)' }} noValidate>
 
         {/* Nombre completo */}
         <div>
-          <label htmlFor="nombre_completo" className="block text-sm font-medium text-gray-700">Nombre completo</label>
+          <label htmlFor="nombre_completo" className="block text-sm font-medium text-white">Nombre completo</label>
           <input
             id="nombre_completo"
             name="nombre_completo"
@@ -102,7 +102,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Familia */}
         <div>
-          <label htmlFor="familia" className="block text-sm font-medium text-gray-700">Grupo familiar proponente</label>
+          <label htmlFor="familia" className="block text-sm font-medium text-white">Grupo familiar proponente</label>
           <input
             id="familia"
             name="familia"
@@ -115,7 +115,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Vereda */}
         <div>
-          <label htmlFor="vereda" className="block text-sm font-medium text-gray-700">Vereda o sector de Santa Elena</label>
+          <label htmlFor="vereda" className="block text-sm font-medium text-white">Vereda o sector de Santa Elena</label>
           <select
             id="vereda"
             name="vereda"
@@ -132,7 +132,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
         {/* Otra vereda */}
         {form.vereda === "Otra" && (
           <div>
-            <label htmlFor="otra_vereda" className="block text-sm font-medium text-gray-700">Otra sector</label>
+            <label htmlFor="otra_vereda" className="block text-sm font-medium text-white">Otra sector</label>
             <input
               id="otra_vereda"
               name="otra_vereda"
@@ -146,10 +146,10 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Organizaciones */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Organización a la que pertenece</label>
+          <label className="block text-sm font-medium text-white">Organización a la que pertenece</label>
           <div className="space-y-2 mt-2">
             {ORGANIZACIONES.map((org) => (
-              <label key={org} className="flex items-center gap-2 text-sm text-gray-700">
+              <label key={org} className="flex items-center gap-2 text-sm text-white">
                 <input
                   type="checkbox"
                   value={org}
@@ -166,7 +166,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
         {/* Otra organización */}
         {form.organizaciones.includes("Otra") && (
           <div>
-            <label htmlFor="otra_organizacion" className="block text-sm font-medium text-gray-700">Otra organización</label>
+            <label htmlFor="otra_organizacion" className="block text-sm font-medium text-white">Otra organización</label>
             <input
               id="otra_organizacion"
               name="otra_organizacion"
@@ -180,7 +180,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Correo */}
         <div>
-          <label htmlFor="correo_electronico" className="block text-sm font-medium text-gray-700">Correo electrónico</label>
+          <label htmlFor="correo_electronico" className="block text-sm font-medium text-white">Correo electrónico</label>
           <input
             id="correo_electronico"
             type="email"
@@ -194,7 +194,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Celular */}
         <div>
-          <label htmlFor="numero_celular" className="block text-sm font-medium text-gray-700">Número celular</label>
+          <label htmlFor="numero_celular" className="block text-sm font-medium text-white">Número celular</label>
           <input
             id="numero_celular"
             name="numero_celular"
@@ -207,7 +207,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Problema */}
         <div>
-          <label htmlFor="problema" className="block text-sm font-medium text-gray-700">¿Qué problema quieres ayudar a resolver?</label>
+          <label htmlFor="problema" className="block text-sm font-medium text-white">¿Qué problema quieres ayudar a resolver?</label>
           <select
             id="problema"
             name="problema"
@@ -223,7 +223,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Nombre práctica */}
         <div>
-          <label htmlFor="nombre_practica" className="block text-sm font-medium text-gray-700">Nombre de la buena práctica</label>
+          <label htmlFor="nombre_practica" className="block text-sm font-medium text-white">Nombre de la buena práctica</label>
           <input
             id="nombre_practica"
             name="nombre_practica"
@@ -236,7 +236,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Descripción */}
         <div>
-          <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700">Explique la buena práctica</label>
+          <label htmlFor="descripcion" className="block text-sm font-medium text-white">Explique la buena práctica</label>
           <textarea
             id="descripcion"
             name="descripcion"
@@ -248,9 +248,9 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
           {errores.descripcion && <p className="text-red-600 text-sm mt-1">{errores.descripcion}</p>}
         </div>
 
-         {/* Redes */}
-         <div>
-          <label htmlFor="redes" className="block text-sm font-medium text-gray-700">Resgitra tus redes sociales</label>
+        {/* Redes */}
+        <div>
+          <label htmlFor="redes" className="block text-sm font-medium text-white">Resgitra tus redes sociales</label>
           <input
             id="redes"
             name="redes"
@@ -274,14 +274,23 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
 
       <Modal visible={showModal} onClose={() => { setShowModal(false); onConfirm(); }}>
-        <h2 className="text-xl font-semibold mb-4">¡Formulario enviado con éxito!</h2>
-        <p className="mb-6">Gracias por tu compromiso. Ahora puedes continuar viendo el desfile.</p>
+        <h2 className="text-xl font-semibold mb-4 text-green-600">✅ ¡Formulario enviado con éxito!</h2>
+
+        <p className="mb-2">La confirmación ha sido enviada a tu correo electrónico. Recuerda revisar tu carpeta de spam o correo no deseado</p>
+        <p className="mb-2 text-sm text-gray-600">
+        </p>
+        <p className="mb-2">
+          📸 No olvides enviar tus evidencias de buenas prácticas al correo: <span className="mb-4 font-medium text-orange-700 break-words">evaluacionpesmcsilletera@gmail.com</span> 
+        </p>
+        
+        <p className="mb-6">Te invitamos a conocer nuestro <span className="font-semibold">Desfile de Buenas Prácticas de Salvaguardia de la Cultura Silletera</span></p>
+
         <button
           onClick={() => {
             setShowModal(false);
             onConfirm();
           }}
-          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+          className="px-4 py-2 bg-green-600 text-white rounded"
         >
           Aceptar
         </button>
