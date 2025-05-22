@@ -42,22 +42,22 @@ export default function App() {
   }
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-black text-center my-5">
-      Buenas prácticas de salvaguardia de la cultura silletera
-        </h1>
+    <div className="min-h-screen flex flex-col justify-end">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center my-5 px-4">
+        Buenas prácticas de salvaguardia de la cultura silletera
+      </h1>
       {!enviado ? (
         <Formulario
-        onSubmitCompromiso={agregarCompromiso}
-        onConfirm={() => {
-          console.log("App recibió confirmación del modal");
-          setEnviado(true);
-        }}
-      />
+          onSubmitCompromiso={agregarCompromiso}
+          onConfirm={() => {
+            console.log("App recibió confirmación del modal");
+            setEnviado(true);
+          }}
+        />
       ) : (
         <Desfile compromisos={compromisos} />
       )}
     </div>
-    
+
   );
 }
