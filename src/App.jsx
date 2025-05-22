@@ -7,12 +7,23 @@ export default function App() {
   const [enviado, setEnviado] = useState(false);
   const API_URL = import.meta.env.VITE_BACKEND;
 
-  // Cargar las buenas prácticas desde backend
+  // Cargar las buenas prácticas desde backend y recargar cada 5 seg
   useEffect(() => {
-    fetch(`${API_URL}/api/buenas_practicas`)
-      .then(res => res.json())
-      .then(data => setCompromisos(data))
-      .catch(err => console.error("Error cargando buenas prácticas:", err));
+    const fetchData = () => {
+      fetch(`${API_URL}/api/buenas_practicas`)
+        .then(res => res.json())
+        .then(data => setCompromisos(data))
+        .catch(err => console.error("Error cargando buenas prácticas:", err));
+    };
+  
+    // Llamada inicial
+    fetchData();
+  
+    // Llamar cada 5 segundos
+    const interval = setInterval(fetchData, 5000);
+  
+    // Limpieza al desmontar
+    return () => clearInterval(interval);
   }, []);
 
   // Función para enviar formulario al backend
