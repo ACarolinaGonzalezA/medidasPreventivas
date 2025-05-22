@@ -250,7 +250,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
 
         {/* Redes */}
         <div>
-          <label htmlFor="redes" className="block text-sm font-medium text-white">Resgitra tus redes sociales</label>
+          <label htmlFor="redes" className="block text-sm font-medium text-white">Resgistra tus redes sociales</label>
           <input
             id="redes"
             name="redes"

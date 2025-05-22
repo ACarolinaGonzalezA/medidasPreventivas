@@ -54,9 +54,27 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col justify-end">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black text-center my-5 px-4">
-        Buenas prácticas de salvaguardia de la cultura silletera
-      </h1>
+      <div
+  className="my-5 px-4 py-4 rounded-md text-white"
+  style={{ backgroundColor: "rgba(223, 130, 38, 0.8)" }}
+>
+  {/* Contenedor horizontal: logo + título */}
+  <div className="flex items-center justify-center mb-4">
+    <img
+      src="/logoNu.png"
+      alt="Logo Silletero"
+      className="hidden md:block w-24 h-24 mr-4 rounded-full border-2 border-white object-cover shadow-md"
+    />
+    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">
+      Buenas prácticas de salvaguardia de la cultura silletera
+    </h1>
+  </div>
+
+  {/* Mensaje debajo, centrado */}
+  <p className="text-center text-sm sm:text-base font-medium italic tracking-wide">
+   En este 2025 la comunidad silletera reafirma su compromiso con el cuidado del medio ambiente y de la cultura durante la Feria de las Flores.
+  </p>
+</div>
       {!enviado ? (
         <Formulario
           onSubmitCompromiso={agregarCompromiso}
