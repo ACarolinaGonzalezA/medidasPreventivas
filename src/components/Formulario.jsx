@@ -36,7 +36,8 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
     numero_celular: "",
     nombre_practica: "",
     problema: "",
-    descripcion: ""
+    descripcion: "",
+    redes:""
   });
 
   const [errores, setErrores] = useState({});
@@ -246,6 +247,19 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
           />
           {errores.descripcion && <p className="text-red-600 text-sm mt-1">{errores.descripcion}</p>}
         </div>
+
+         {/* Redes */}
+         <div>
+          <label htmlFor="redes" className="block text-sm font-medium text-gray-700">Compartenos tus redes sociales</label>
+          <input
+            id="redes"
+            name="redes"
+            value={form.redes}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+        </div>
+
 
         {/* Botón */}
         <div className="text-center">
