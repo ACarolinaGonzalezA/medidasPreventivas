@@ -132,7 +132,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
         {/* Otra vereda */}
         {form.vereda === "Otra" && (
           <div>
-            <label htmlFor="otra_vereda" className="block text-sm font-medium text-white">Otra sector</label>
+            <label htmlFor="otra_vereda" className="block text-sm font-medium text-white">Otro sector</label>
             <input
               id="otra_vereda"
               name="otra_vereda"
