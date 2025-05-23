@@ -61,9 +61,10 @@ export default function App() {
   {/* Contenedor horizontal: logo + título */}
   <div className="flex items-center justify-center mb-4">
     <img
-      src="/logoNu.png"
+      src="/sello.png"
       alt="Logo Silletero"
-      className="hidden md:block w-24 h-24 mr-4 rounded-full border-2 border-white object-cover shadow-md"
+      className="hidden md:block mr-4 rounded-full object-cover"
+  style={{ width: "220px", height: "220px" }}
     />
     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">
       Buenas prácticas de salvaguardia de la cultura silletera
