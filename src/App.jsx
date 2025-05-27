@@ -15,13 +15,13 @@ export default function App() {
         .then(data => setCompromisos(data))
         .catch(err => console.error("Error cargando buenas prácticas:", err));
     };
-  
+
     // Llamada inicial
     fetchData();
-  
+
     // Llamar cada 5 segundos
     const interval = setInterval(fetchData, 5000);
-  
+
     // Limpieza al desmontar
     return () => clearInterval(interval);
   }, []);
@@ -55,27 +55,46 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col justify-end">
       <div
-  className="my-5 px-4 py-4 rounded-md text-white"
-  style={{ backgroundColor: "rgba(223, 130, 38, 0.8)" }}
->
-  {/* Contenedor horizontal: logo + título */}
-  <div className="flex items-center justify-center mb-4">
-    <img
-      src="/sello.png"
-      alt="Logo Silletero"
-      className="hidden md:block mr-4 rounded-full object-cover"
-  style={{ width: "220px", height: "220px" }}
-    />
-    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">
-      Buenas prácticas de salvaguardia de la cultura silletera
-    </h1>
-  </div>
+        className="my-5 px-4 py-4 rounded-md text-white"
+        style={{ backgroundColor: "rgba(223, 130, 38, 0.8)" }}
+      >
+        {/* Contenedor horizontal: logo + título */}
+        <div className="flex items-center justify-center mb-4">
+          <img
+            src="/sello.png"
+            alt="Logo Silletero"
+            className="hidden md:block mr-4 rounded-full object-cover"
+            style={{ width: "150px", height: "150px" }}
+          />
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">
+            Buenas prácticas de salvaguardia de la cultura silletera
+          </h1>
+        </div>
 
-  {/* Mensaje debajo, centrado */}
-  <p className="text-center text-sm sm:text-base font-medium italic tracking-wide">
-   En este 2025 la comunidad silletera reafirma su compromiso con el cuidado del medio ambiente y de la cultura durante la Feria de las Flores.
-  </p>
-</div>
+        {/* Mensaje debajo, centrado */}
+        <p className="text-center text-sm sm:text-base font-medium italic tracking-wide">
+          En este 2025 la comunidad silletera reafirma su compromiso con el cuidado del medio ambiente y de la cultura durante la Feria de las Flores.
+        </p>
+      </div>
+      {/* Botón de acceso directo al desfile */}
+      {!enviado && (
+        <div
+        onClick={() => setEnviado(true)}
+        className="flex items-center gap-2 mb-4 cursor-pointer text-white transition self-end"
+      >
+        <span className="font-semibold">Ver desfile</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8 text-white hover:opacity-80 transition"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={4}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
+      )}
       {!enviado ? (
         <Formulario
           onSubmitCompromiso={agregarCompromiso}
@@ -85,7 +104,26 @@ export default function App() {
           }}
         />
       ) : (
-        <Desfile compromisos={compromisos} />
+
+        <>
+          <div
+  onClick={() => setEnviado(false)}
+  className="flex items-center gap-2 self-start mb-4 cursor-pointer text-white transition"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-8 w-8 text-white hover:opacity-80 transition"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={4}
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+  </svg>
+  <span className="font-semibold">Ver formulario</span>
+</div>
+          <Desfile compromisos={compromisos} />
+        </>
       )}
     </div>
 
