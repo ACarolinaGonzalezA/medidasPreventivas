@@ -55,7 +55,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col justify-end">
       <div
-        className="my-5 px-4 py-4 rounded-md text-white"
+        className="my-2 px-2 py-2 rounded-md text-white"
         style={{ backgroundColor: "rgba(223, 130, 38, 0.8)" }}
       >
         {/* Contenedor horizontal: logo + título */}
@@ -64,17 +64,18 @@ export default function App() {
             src="/sello.png"
             alt="Logo Silletero"
             className="hidden md:block mr-4 rounded-full object-cover"
-            style={{ width: "150px", height: "150px" }}
+            style={{ width: "150px", height: "120px" }}
           />
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center">
             Buenas prácticas de salvaguardia de la cultura silletera
           </h1>
+          <p></p>
         </div>
 
-        {/* Mensaje debajo, centrado */}
+        {/* 
         <p className="text-center text-sm sm:text-base font-medium italic tracking-wide">
           En este 2025 la comunidad silletera reafirma su compromiso con el cuidado del medio ambiente y de la cultura durante la Feria de las Flores.
-        </p>
+        </p>*/}
       </div>
       {/* Botón de acceso directo al desfile */}
       {!enviado && (

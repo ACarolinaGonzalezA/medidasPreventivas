@@ -17,8 +17,8 @@ export function validarFormulario(form) {
       errores.vereda = "Campo obligatorio.";
     } else if (form.vereda === "Otra" && !form.otra_vereda) {
       errores.otra_vereda = "Especifica la otra vereda o lugar de residencia.";
-    } else if (form.otra_vereda && form.otra_vereda.length > 100) {
-      errores.otra_vereda = "Máximo 100 caracteres.";
+    } else if (form.otra_vereda && form.otra_vereda.length > 50) {
+      errores.otra_vereda = "Máximo 50 caracteres.";
     }
   
     const seleccionadas = form.organizaciones ? form.organizaciones.split(", ") : [];

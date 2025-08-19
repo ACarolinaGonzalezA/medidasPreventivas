@@ -95,6 +95,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
             name="nombre_completo"
             value={form.nombre_completo}
             onChange={handleChange}
+            maxLength={100} 
             className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           {errores.nombre_completo && <p className="text-red-600 text-sm mt-1">{errores.nombre_completo}</p>}
@@ -108,6 +109,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
             name="familia"
             value={form.familia}
             onChange={handleChange}
+            maxLength={50} 
             className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           {errores.familia && <p className="text-red-600 text-sm mt-1">{errores.familia}</p>}
@@ -138,6 +140,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
               name="otra_vereda"
               value={form.otra_vereda}
               onChange={handleChange}
+              maxLength={50} 
               className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             {errores.otra_vereda && <p className="text-red-600 text-sm mt-1">{errores.otra_vereda}</p>}
@@ -172,6 +175,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
               name="otra_organizacion"
               value={form.otra_organizacion}
               onChange={handleChange}
+              maxLength={100} 
               className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
             />
             {errores.otra_organizacion && <p className="text-red-600 text-sm mt-1">{errores.otra_organizacion}</p>}
@@ -187,6 +191,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
             name="correo_electronico"
             value={form.correo_electronico}
             onChange={handleChange}
+            maxLength={100} 
             className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           {errores.correo_electronico && <p className="text-red-600 text-sm mt-1">{errores.correo_electronico}</p>}
@@ -200,6 +205,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
             name="numero_celular"
             value={form.numero_celular}
             onChange={handleChange}
+            maxLength={10} 
             className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           {errores.numero_celular && <p className="text-red-600 text-sm mt-1">{errores.numero_celular}</p>}
@@ -229,6 +235,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
             name="nombre_practica"
             value={form.nombre_practica}
             onChange={handleChange}
+            maxLength={50} 
             className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           {errores.nombre_practica && <p className="text-red-600 text-sm mt-1">{errores.nombre_practica}</p>}
@@ -243,6 +250,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
             rows="4"
             value={form.descripcion}
             onChange={handleChange}
+            maxLength={350} 
             className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
           {errores.descripcion && <p className="text-red-600 text-sm mt-1">{errores.descripcion}</p>}
@@ -256,6 +264,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
             name="redes"
             value={form.redes}
             onChange={handleChange}
+            maxLength={100} 
             className="mt-1 block w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
