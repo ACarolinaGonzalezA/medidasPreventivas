@@ -285,7 +285,7 @@ export default function Formulario({ onSubmitCompromiso, onConfirm }) {
       <Modal visible={showModal} onClose={() => { setShowModal(false); onConfirm(); }}>
         <h2 className="text-xl font-semibold mb-4 text-green-600">✅ ¡Formulario enviado con éxito!</h2>
 
-        <p className="mb-2">La confirmación ha sido enviada a tu correo electrónico. Recuerda revisar tu carpeta de spam o correo no deseado</p>
+        {/*<p className="mb-2">La confirmación ha sido enviada a tu correo electrónico. Recuerda revisar tu carpeta de spam o correo no deseado</p>*/}
         <p className="mb-2 text-sm text-gray-600">
         </p>
         <p className="mb-2">
